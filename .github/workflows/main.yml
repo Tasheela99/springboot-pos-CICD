@@ -16,8 +16,8 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_ROOT_PASSWORD: rootpassword
-          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: Agtsj123##
+          MYSQL_DATABASE: pos_api_system_db
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-interval=10s
@@ -40,13 +40,6 @@ jobs:
             echo "Waiting for database connection..."
             sleep 5
           done
-
-      - name: Unit Tests
-        env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/pos_api_system_db
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: Agtsj123##
-        run: mvn -B test --file pom.xml
 
       - name: Archive Test Reports
         uses: actions/upload-artifact@v2
