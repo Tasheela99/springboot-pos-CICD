@@ -22,6 +22,16 @@ jobs:
       - name: Unit Tests
         run: mvn -B test --file pom.xml
 
+      - name: Print Test Results
+        if: failure()
+        run: cat target/surefire-reports/*.txt
+
+      - name: Archive Test Reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: target/surefire-reports/
+
       - name: Build The Application
         run: |
           mvn clean
